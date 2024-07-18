@@ -72,20 +72,20 @@ public class ScoreManager : MonoBehaviour
 			comboStop = 0f;
 		}
 		
-		comboText.text = comboTime.ToString("");
+		comboText.text = comboTime.ToString("F2");
 		comboValueText.text = comboValue.ToString("");
     }
 	
 	public void BulletHit()
 	{
 		bHit +=1;
-		accuracyText.text = Accuracy().ToString("");
+		accuracyText.text = Accuracy().ToString("F3");
 	}
 	
 	public void BulletMiss()
 	{
 		bMiss +=1;
-		accuracyText.text = Accuracy().ToString("");
+		accuracyText.text = Accuracy().ToString("F3");
 		comboTime -= comboMissB * comboTimeScale;
 	}
 	
