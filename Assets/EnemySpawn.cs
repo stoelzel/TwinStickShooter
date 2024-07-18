@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -20,11 +21,14 @@ public class EnemySpawn : MonoBehaviour
 	public int waveLeft;
 	private bool roundInter;
 	public int round;
+	public Text start;
 	
     // Start is called before the first frame update
     void Start()
     {
         active = false;
+		
+		start.text = "Press space to start";
 		
 		GameObject scoreManagerObject = GameObject.Find("Score Manager");
 		if (scoreManagerObject == null)
@@ -48,10 +52,12 @@ public class EnemySpawn : MonoBehaviour
 			if(!active)
 			{
 			active = true;
+			start.text = "";
 			}
 			else
 			{
 			active = false;
+			start.text = "Press space to start";
 			}
 		}
 		
@@ -72,7 +78,6 @@ public class EnemySpawn : MonoBehaviour
 				scoreManager.roundInterSm = false;
 				round += 1;
 				}
-				
 			}
 		}
 		

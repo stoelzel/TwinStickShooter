@@ -8,8 +8,10 @@ public class EnemyScript : MonoBehaviour
 	public ScoreManager scoreManager;
 	public EnemySpawn enemySpawn;
 	private bool isHit;
-	
-	[SerializeField] private ParticleSystem deathpart;
+	public GameObject particles;
+	public CameraShake cameraShake;
+	public SoundFruit soundFruit;
+	public GameObject sound;
 	
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,12 @@ public class EnemyScript : MonoBehaviour
 		
 		GameObject enemySpawnObject = GameObject.Find("EnemySpawn");
 		enemySpawn = enemySpawnObject.GetComponent<EnemySpawn>();
+		
+		GameObject cameraShakeObject = GameObject.Find("Main Camera");
+		cameraShake = cameraShakeObject.GetComponent<CameraShake>();
+		
+		GameObject soundFruitObject = GameObject.Find("Sound Fruit");
+		soundFruit = soundFruitObject.GetComponent<SoundFruit>();
 		
 		enemySpawn.fruitLeft += 1f;
     }
@@ -35,7 +43,9 @@ public class EnemyScript : MonoBehaviour
 		{
 			isHit = true;
 			//needs to be seperated from body before destruction
-			deathpart.Play();
+			Instantiate(particles, transform.position, Quaternion.Euler(new Vector3(90, 0, 0)));
+			cameraShake.timer = 0.1f;
+			soundFruit.PlaySounds();
 			scoreManager.FruitHit();
 			enemySpawn.fruitLeft -= 1f;
 			Destroy(Enemy);
